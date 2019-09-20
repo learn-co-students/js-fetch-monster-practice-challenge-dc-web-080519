@@ -1,5 +1,5 @@
 const url = "http://localhost:3000/monsters"
-let pageNum = 1
+let pageNum = 20
 
 const monsterIndex = document.getElementById('monster-container');
 const monsterForm = document.getElementById("monster-form");
@@ -69,6 +69,7 @@ function handleCreateSubmit(e) {
     alert("Don't look behind you! Server's down!")
     console.log('There has been a problem with your fetch operation: ', error.message);
   })
+  e.target.reset()
 }
 
 //Forward Back Buttons
@@ -79,7 +80,12 @@ function moveForward() {
 }
 
 function moveBack() {
-  --pageNum
+  if (pageNum > 1){
+    --pageNum
+  }
+  else {
+    pageNum = 1
+  }
   monsterIndex.innerHTML = '';
   fetch50Monsters()
 }
